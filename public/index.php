@@ -1,2 +1,4 @@
 <?php
-require "index.html";
+require_once("conf/config.php");
+
+Routing::buildRoute();

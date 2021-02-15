@@ -1,0 +1,6 @@
+{
+    "name": "vagrant/antblog.test",
+    "description": "php blog",
+    "type": "project",
+    "require": {}
+}

@@ -1,6 +1,6 @@
 <?php
 
-class Routing
+class Router
 {
 
     public static function buildRoute()

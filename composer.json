@@ -1,6 +1,11 @@
 {
-    "name": "vagrant/antblog.test",
+    "name": "0gnev/antblog.test",
     "description": "php blog",
     "type": "project",
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "Core\\": "Core/",
+            "App\\":"App/"
+        }
+    }
 }

@@ -4,96 +4,63 @@ namespace Core;
 
 class Router
 {
+    public Request $request;
+    protected array $routes = [];
+    public Response $responce;
 
-    protected $routes = [];
 
-    protected $params = [];
-
-    public function add($route, $params=[]){
-        $route = preg_replace('/\//','\\/', $route);
-
-        $route = preg_replace('/\{([a-z]+)\}/', '(?P<\1>[a-z-]+)',$route);
-
-        $route = preg_replace('/\{([a-z]+):([^\}]+)}/', '(?P<\1>\2', $route);
-
-        $route = '/^' . $route . '$/i';
-        $this->routes[$route] = $params;
-    }
-    public function getRoutes()
+    public function __construct(Request $request, Response $response)
     {
-        return $this->routes;
+       $this->request = $request;
+       $this->responce = $response;
     }
-    public function match($url)
+    public function get($path, $callback)
     {
-        foreach ($this->routes as $route => $params) {
-            if (preg_match($route,$url,$matches)) {
-                foreach ($matches as $key => $match) {
-                    if (is_string($key)){
-                        $params[$key]=$match;
-                    }
-                }
-                $this->params = $params;
-                return true;
-            }
+        $this->routes['get'][$path] = $callback;
+    }
+    public function post($path, $callback)
+    {
+        $this->routes['post'][$path] = $callback;
+    }
+
+    public function resolve()
+    {
+        $path = $this->request->getPath();
+        $method = $this->request->method();
+        $callback = $this->routes[$method][$path] ?? false;
+        if ($callback === false) {
+            $this->responce->setStatusCode(404);
+            return $this->renderView("_404");
         }
-        return false;
-        
-    }
-    public function getParams()
-    {
-        return $this->params;
-    }
-
-    public function dispatch($url)
-    {
-        $url = $this->removeQueryStringVariables($url);
-        if ($this->match($url)){
-            $controller = $this->params['controller'];
-            $controller = $this->convertToStudlyCaps($controller);
-            $controller = $this->getNamespace() . $controller;
-
-            if (class_exists($controller)){
-                $controller_object = new $controller($this->params);
-
-                $action = $this->params['action'];
-                $action = $this->convertToCamelCase($action);
-
-                if(preg_match('/action$/i', $action)==0) {
-                    $controller_object->$action();
-                }
-            }
+        if (is_string($callback)){
+            return $this->renderView($callback);
         }
-    }
-    protected function convertToCamelCase($string){
-        return lcfirst($this->convertToStudlyCaps($string));
-    }
-    protected function convertToStudlyCaps($string){
-        return str_replace(' ','', ucwords(str_replace('-',' ',$string)));
-    }
-    protected function removeQueryStringVariables($url){
-        if ($url!=''){
-            $parts=explode('&',$url,2);
-
-            if (strpos($parts[0], '=') ===false) {
-                $url = $parts[0];
-            } else {
-                $url = '';
-            }
+        if (is_array($callback)) {
+            Application::$app->controller = new $callback[0]();
+            $callback[0] = Application::$app->controller;
         }
-        return $url;
+        echo call_user_func($callback,$this->request);
     }
-    protected function getNamespace(){
-        $namespace = 'App\Controllers\\';
-
-        if(array_key_exists('namespace', $this->params)) {
-            $namespace.=$this->params['namespace'].'\\';
-        }
-        return $namespace;
-    }
-
-
-
-    public function errorPage()
+    public function renderView($view, $params = [])
     {
+        $layoutContent = $this->layoutContent();
+        $viewContent = $this->renderOnlyView($view, $params);
+        return str_replace('{{content}}', $viewContent, $layoutContent);
+    }
+    protected function layoutContent()
+    {
+        $layout = Application::$app->controller->layout;
+        ob_start();
+        include_once Application::$ROOT_DIR."/App/views/layouts/$layout.php";
+        return ob_get_clean();
+    }
+    protected function renderOnlyView($view, $params)
+    {
+        foreach ($params as $key => $value) {
+            $$key = $value; 
+        }
+        ob_start();
+        include_once Application::$ROOT_DIR."/App/views/$view.php";
+        return ob_get_clean();        
     }
 }

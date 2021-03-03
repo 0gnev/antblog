@@ -1,13 +1,20 @@
 <?php
-require_once("../conf/config.php");
 
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(E_ALL);
+require __DIR__ . '/../vendor/autoload.php';
 
-$router = new Core\Router();
+use Core\Application;
+use App\Controllers\SiteController;
+use App\Controllers\AuthController;
 
-$router->add('',['controller'=>'Home', 'action'=>'index']);
-$router->add('{controller}/{action}');
+$app = new Application(dirname(__DIR__));
 
-$router->dispatch($_SERVER['QUERY_STRING']);
+$app->router->get('/', [SiteController::class, 'home']);
+$app->router->get('/contact', [SiteController::class, 'contact']);
+$app->router->post('/contact', [SiteController::class, 'handleContact']);
+
+$app->router->get('/login', [AuthController::class, 'login']);
+$app->router->post('/login', [AuthController::class, 'login']);
+$app->router->get('/register', [AuthController::class, 'register']);
+$app->router->post('/register', [AuthController::class, 'register']);
+
+$app->run();

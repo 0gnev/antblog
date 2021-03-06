@@ -11,8 +11,8 @@ class Router
 
     public function __construct(Request $request, Response $response)
     {
-       $this->request = $request;
-       $this->responce = $response;
+        $this->request = $request;
+        $this->responce = $response;
     }
     public function get($path, $callback)
     {
@@ -32,14 +32,14 @@ class Router
             $this->responce->setStatusCode(404);
             return $this->renderView("_404");
         }
-        if (is_string($callback)){
+        if (is_string($callback)) {
             return $this->renderView($callback);
         }
         if (is_array($callback)) {
             Application::$app->controller = new $callback[0]();
             $callback[0] = Application::$app->controller;
         }
-        echo call_user_func($callback,$this->request);
+        echo call_user_func($callback, $this->request, $this->responce);
     }
     public function renderView($view, $params = [])
     {
@@ -51,16 +51,16 @@ class Router
     {
         $layout = Application::$app->controller->layout;
         ob_start();
-        include_once Application::$ROOT_DIR."/App/views/layouts/$layout.php";
+        include_once Application::$ROOT_DIR . "/App/views/layouts/$layout.php";
         return ob_get_clean();
     }
     protected function renderOnlyView($view, $params)
     {
         foreach ($params as $key => $value) {
-            $$key = $value; 
+            $$key = $value;
         }
         ob_start();
-        include_once Application::$ROOT_DIR."/App/views/$view.php";
-        return ob_get_clean();        
+        include_once Application::$ROOT_DIR . "/App/views/$view.php";
+        return ob_get_clean();
     }
 }

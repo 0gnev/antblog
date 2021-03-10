@@ -6,7 +6,7 @@ use Core\Application;
 use App\Controllers\SiteController;
 use App\Controllers\AuthController;
 
-$dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 $config = [
     'userClass' => App\Models\User::class,
@@ -17,7 +17,7 @@ $config = [
     ]
 ];
 
-$app = new Application(dirname(__DIR__), $config);
+$app = new Application(__DIR__, $config);
 
 
 

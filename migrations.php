@@ -6,7 +6,18 @@ use Core\Application;
 use App\Controllers\SiteController;
 use App\Controllers\AuthController;
 
-$app = new Application(__DIR__);
+$dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+$config = [
+    'userClass' => App\Models\User::class,
+    'db' => [
+        'dsn' => $_ENV['DB_DSN'],
+        'user' => $_ENV['DB_USER'],
+        'password' => $_ENV['DB_PASSWORD']
+    ]
+];
+
+$app = new Application(dirname(__DIR__), $config);
 
 
 

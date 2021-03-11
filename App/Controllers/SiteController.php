@@ -18,11 +18,12 @@ class SiteController extends Controller
     {
         return $this->render('contact');
     }
+    public function about()
+    {
+        return $this->render('about');
+    }
     public function home()
     {
-        $params = [
-            'name' => "UserName"
-        ];
-        return $this->render('home', $params);
+        return $this->render('home');
     }
 }

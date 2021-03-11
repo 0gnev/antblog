@@ -51,7 +51,7 @@ class Router
     {
         $layout = Application::$app->controller->layout;
         ob_start();
-        include_once Application::$ROOT_DIR . "/App/views/layouts/$layout.php";
+        include_once Application::$ROOT_DIR . "/App/Views/layouts/$layout.php";
         return ob_get_clean();
     }
     protected function renderOnlyView($view, $params)
@@ -60,7 +60,7 @@ class Router
             $$key = $value;
         }
         ob_start();
-        include_once Application::$ROOT_DIR . "/App/views/$view.php";
+        include_once Application::$ROOT_DIR . "/App/Views/$view.php";
         return ob_get_clean();
     }
 }

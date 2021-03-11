@@ -36,7 +36,7 @@ class Application
         }
         
     }
-    public function isGuest()
+    static public function isGuest()
     {
         return !self::$app->user;
     }

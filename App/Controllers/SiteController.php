@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use Core\Application;
 use Core\Controller;
 use Core\Request;
 
@@ -25,5 +24,9 @@ class SiteController extends Controller
     public function home()
     {
         return $this->render('home');
+    }
+    public function profile()
+    {
+        return $this->render('profile');
     }
 }

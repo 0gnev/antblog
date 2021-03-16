@@ -2,3 +2,5 @@ composer.phar
 /vendor/
 /runtime/
 .env
+/.vscode/
+.DS_Store

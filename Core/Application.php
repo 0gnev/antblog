@@ -42,7 +42,14 @@ class Application
         return !self::$app->user;
     }
     public function run(){
-        echo $this->router->resolve();
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $e) {
+            $this->responce->setStatusCode($e->getCode());
+            echo $this->router->renderView('_error', [
+                'exception' => $e
+            ]);
+        }
     }
     public function getController()
     {

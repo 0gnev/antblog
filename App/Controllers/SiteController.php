@@ -25,8 +25,8 @@ class SiteController extends Controller
     {
         return $this->render('home');
     }
-    public function profile()
+    public function article()
     {
-        return $this->render('profile');
+        return $this->render('article');
     }
 }

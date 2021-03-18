@@ -1,13 +1,11 @@
 <h1>Contact us</h1>
 <form action="" method="post">
-<label>Subject</label>
+<label>Telephone</label>
   <div class="form-group">
-<!--    <input type="text" name="Subject" class="form-control"> -->
-    <textarea id="textarea" rows="3" spellcheck="false" data-gramm="false"></textarea>
+<p>8-800-555-35-35</p>
   </div>
+  <label>Email</label>
   <div class="form-group">
-    <label>Email</label>
-    <input type="text" name="email" class="form-control">
+    <p>example@mail.com</p>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
 </form>

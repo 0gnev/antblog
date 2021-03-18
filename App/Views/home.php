@@ -5,6 +5,10 @@
 <a href="/article"> 
   <div class = "first-container">1</div>
 </a>
+<a href="/article">
   <div class = "second-container">2</div>
+</a>
+<a href="/article">
   <div class = "third-container">3</div>
+</a>
 </div>

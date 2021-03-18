@@ -23,7 +23,9 @@ $app->router->get('/', [SiteController::class, 'home']);
 $app->router->get('/contact', [SiteController::class, 'contact']);
 $app->router->get('/about', [SiteController::class, 'about']);
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
-$app->router->get('/article', [SiteController::class, 'article']);
+$app->router->get('/article1', [SiteController::class, 'article1']);
+$app->router->get('/article2', [SiteController::class, 'article2']);
+$app->router->get('/article3', [SiteController::class, 'article3']);
 
 $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);

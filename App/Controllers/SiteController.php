@@ -25,8 +25,16 @@ class SiteController extends Controller
     {
         return $this->render('home');
     }
-    public function article()
+    public function article1()
     {
-        return $this->render('article');
+        return $this->render('article1');
+    }
+    public function article2()
+    {
+        return $this->render('article2');
+    }
+    public function article3()
+    {
+        return $this->render('article3');
     }
 }

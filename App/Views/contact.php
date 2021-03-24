@@ -1,11 +1,15 @@
+<?php
+/** @var $this \Core\View */
+
+use Core\form\Form;
+
+/** @var $model \App\Models\ContactForm */
+$this->title = 'Contact';
+?>
 <h1>Contact us</h1>
-<form action="" method="post">
-<label>Telephone</label>
-  <div class="form-group">
-<p>8-800-555-35-35</p>
-  </div>
-  <label>Email</label>
-  <div class="form-group">
-    <p>example@mail.com</p>
-  </div>
-</form>
+
+<?php $form = Form::begin('', 'post');?>
+<?php echo $form->field($model, 'subject'); ?>
+<?php echo $form->field($model, 'email'); ?>
+<button type="submit" class="btn btn-primary">Submit</button>
+<?php Form::end(); ?>

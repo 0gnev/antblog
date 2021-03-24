@@ -1,7 +1,8 @@
 <?php
 
 use Core\form\Form;
-
+/** @var $this \Core\View */
+$this->title = 'Register';
 ?>
 
 

@@ -2,20 +2,25 @@
 
 namespace App\Controllers;
 
+use App\Models\ContactForm;
+use Core\Application;
 use Core\Controller;
 use Core\Request;
+use Core\Response;
 
 class SiteController extends Controller
 {
-    public function handleContact(Request $request)
+    public function contact(Request $request, Response $response)
     {
-        $body = $request->getBody();
-         
-        return 'Handling submitted data';
-    }
-    public function contact()
-    {
-        return $this->render('contact');
+        $contact = new ContactForm;
+        if ($request->isPost()) {
+            $contact->loadData($request->getBody());
+            if ($contact->validate() && $contact->send()) {
+                Application::$app->session->setFlash('success', 'Thanks for contacting us.');
+                return $response->redirect('/contact');
+            }
+        }
+        return $this->render('contact', ['model' => $contact]);
     }
     public function about()
     {

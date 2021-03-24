@@ -1,7 +1,10 @@
 <?php
 
-use Core\form\Form;
+
 /** @var $this \Core\View */
+
+use App\Views\form\Form;
+
 $this->title = 'Login';
 ?>
 

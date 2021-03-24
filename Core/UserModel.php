@@ -2,7 +2,7 @@
 
 namespace Core;
 
-use App\Models\DbModel;
+use Core\db\DbModel;
 
 abstract class UserModel extends DbModel
 {

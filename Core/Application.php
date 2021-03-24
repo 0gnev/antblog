@@ -1,7 +1,8 @@
 <?php
 namespace Core;
 
-use App\Models\DbModel;
+use Core\db\Database;
+use Core\db\DbModel;
 
 class Application
 {
@@ -61,7 +62,7 @@ class Application
     {
         $this->controller = $controller;
     }
-    public function login(DbModel $user)
+    public function login(UserModel $user)
     {
         $this->user = $user;
         $primaryKey = $user->primaryKey();

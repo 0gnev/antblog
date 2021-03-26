@@ -3,8 +3,6 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use Core\Application;
-use App\Controllers\SiteController;
-use App\Controllers\AuthController;
 
 $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();

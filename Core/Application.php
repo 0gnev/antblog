@@ -18,6 +18,7 @@ class Application
     public ?Controller $controller = null;
     public ?UserModel $user;
     public View $view;
+    public Mailer $mail;
     public function __construct($rootPath, array $config)
     {
         $this->userClass = $config['userClass'];
@@ -27,6 +28,7 @@ class Application
         $this->responce = new Response();
         $this->session = new Session();
         $this->view = new View();
+        $this->mail = new Mailer;
         $this->router = new Router($this->request, $this->responce);
 
         $this->db = new Database($config['db']);

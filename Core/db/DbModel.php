@@ -26,6 +26,24 @@ abstract class DbModel extends Model
         $statement->execute();
         return true;
     }
+    public function change($id, $attribute, $newmean)
+    {
+        $tableName = $this->tableName();
+        $statement = self::prepare("UPDATE $tableName
+        SET $attribute = '$newmean'
+        WHERE id = $id;");
+        $statement->execute();
+        return true;
+    }
+    
+    public function getValueByID($id, $attribute)
+    {
+        $tableName = $this->tableName();
+        $statement = self::prepare("SELECT $attribute from $tableName WHERE id = $id;");
+        $statement->execute();
+        return true;
+    }
+
     public function findOne($where) // [email => user@example.com, firstname => userName]
     {
         $tableName = static::tableName();

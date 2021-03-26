@@ -16,3 +16,4 @@ $this->title = 'Login';
     <?php echo $form->field($model, 'password')->passwordField() ?>
     <button class="btn btn-success">Submit</button>
 <?php Form::end() ?>
+<a class="nav-link" href="/reset">Reset password</a>

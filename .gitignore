@@ -4,4 +4,4 @@ composer.phar
 .env
 /.vscode/
 .DS_Store
-/Config/
+/Config/MailerConfig.php

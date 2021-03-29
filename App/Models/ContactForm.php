@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Core\Application;
 use Core\Model;
 
 class ContactForm extends Model
@@ -27,6 +28,8 @@ class ContactForm extends Model
     }
     public function send()
     {
+        $email = $this->email;
+        Application::$app->mail->sendMail($email, "Contact us", "Thanks for contacting");
         return true;
     }
 }

@@ -8,10 +8,10 @@ use App\Views\form\Form;
 $this->title = 'Register';
 ?>
 
+<div class="container">
+    <h1>Register</h1>
 
-<h1>Register</h1>
-
-<?php $form = Form::begin('', 'post') ?>
+    <?php $form = Form::begin('', 'post') ?>
     <div class="row">
         <div class="col">
             <?php echo $form->field($model, 'firstname') ?>
@@ -22,6 +22,12 @@ $this->title = 'Register';
     </div>
     <?php echo $form->field($model, 'email') ?>
     <?php echo $form->field($model, 'password')->passwordField() ?>
+    <div class="col-auto">
+        <span id="passwordHelpInline" class="form-text">
+            Must be 8-24 characters long.
+        </span>
+    </div>
     <?php echo $form->field($model, 'passwordConfirm')->passwordField() ?>
     <button class="btn btn-success">Submit</button>
-<?php Form::end() ?>
+    <?php Form::end() ?>
+</div>

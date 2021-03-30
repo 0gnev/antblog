@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Change email</h1>
 <?php
 $this->title = 'Change email';
@@ -12,3 +13,4 @@ use App\Views\form\Form;
 
 <button type="submit" class="btn btn-primary">Submit</button>
 <?php Form::end(); ?>
+</div>

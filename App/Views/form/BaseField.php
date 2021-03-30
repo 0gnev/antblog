@@ -19,8 +19,8 @@ abstract class BaseField
 
     public function __toString()
     {
-        return sprintf('<div class="form-group">
-                <label>%s</label>
+        return sprintf('<div class="mb-3 py-1">
+                <label class="form-label">%s</label>
                 %s
                 <div class="invalid-feedback">
                     %s

@@ -2,7 +2,6 @@
 namespace Core;
 
 use Core\db\Database;
-use Core\db\DbModel;
 
 class Application
 {
